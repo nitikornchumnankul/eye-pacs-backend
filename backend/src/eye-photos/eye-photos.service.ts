@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SearchEyePhotosDto } from './dto/search-eye-photos.dto';
 import { EyePhotos } from './eye-photos.entity';
 import { EyePhotosRepository } from './eye-photos.repository';
+import * as fs from 'fs'
 
 @Injectable()
 export class EyePhotosService {
@@ -68,6 +69,9 @@ export class EyePhotosService {
         try {
             const photo = await this.getEyePhotoById(eye_photo_id)
             await this.eyePhotosRepository.delete(eye_photo_id)
+
+            fs.unlinkSync(photo.path)
+
             return photo
         } catch(e) {
             throw new NotFoundException({
