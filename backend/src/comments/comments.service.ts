@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Comments } from './comments.entity';
 import { CommentsRepository } from './comments.repository';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { EditCommentDto } from './dto/edit-comment.dto';
 
 @Injectable()
 export class CommentsService {
@@ -29,6 +30,21 @@ export class CommentsService {
         try {
             const comment = await this.commentsRepostiory.findOne(comment_id)
             return comment
+        } catch(e) {
+            throw new NotFoundException({
+                message: 'Error, comment is not found.'
+            })
+        }
+    }
+
+    async updateComment(comment_id: string, editCommentDto: EditCommentDto): Promise<Comments> {
+        try {
+            const comment = await this.getCommentById(comment_id)
+            const { description } = editCommentDto
+
+            comment.description = description
+
+            return await this.commentsRepostiory.save(comment)
         } catch(e) {
             throw new NotFoundException({
                 message: 'Error, comment is not found.'
