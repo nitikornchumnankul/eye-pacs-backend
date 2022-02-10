@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { EyePhotosModule } from './eye-photos/eye-photos.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { EyePhotosModule } from './eye-photos/eye-photos.module';
     // Module
     AuthModule,
     UsersModule,
-    EyePhotosModule
+    EyePhotosModule,
+    CommentsModule
   ],
   controllers: [AppController],
   providers: [AppService],

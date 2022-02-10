@@ -20,7 +20,7 @@ import { diskStorage } from 'multer';
       useFactory: async (configService: ConfigService) => {
         return {
           fileFilter: (req, file, cb) => {
-            if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg" || file.mimetype == "image/gif") {
               cb(null, true);
             } else {
               cb(null, false);
