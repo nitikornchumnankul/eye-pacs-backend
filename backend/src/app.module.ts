@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { EyePhotosModule } from './eye-photos/eye-photos.module';
 import { CommentsModule } from './comments/comments.module';
+import { Table1Module } from './table-1/table-1.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { CommentsModule } from './comments/comments.module';
     AuthModule,
     UsersModule,
     EyePhotosModule,
-    CommentsModule
+    CommentsModule,
+    Table1Module
   ],
   controllers: [AppController],
   providers: [AppService],

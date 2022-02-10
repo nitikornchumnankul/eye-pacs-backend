@@ -1,3 +1,4 @@
+import { Status } from "src/enum/status.enum";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity({ name: 'eye_photos' })
@@ -8,4 +9,7 @@ export class EyePhotos {
 
     @Column()
     path: string
+
+    @Column({ default: Status.inPorgress })
+    status: Status
 }
