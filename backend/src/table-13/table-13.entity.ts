@@ -1,7 +1,7 @@
 import { EyePhotos } from "src/eye-photos/eye-photos.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'table-13' })
+@Entity({ name: 'table_13' })
 export class Table13 {
 
     @PrimaryGeneratedColumn('uuid')

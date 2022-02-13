@@ -3,7 +3,7 @@
 import { EyePhotos } from "src/eye-photos/eye-photos.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'table-5' })
+@Entity({ name: 'table_5' })
 export class Table5 {
     
     @PrimaryGeneratedColumn('uuid')
