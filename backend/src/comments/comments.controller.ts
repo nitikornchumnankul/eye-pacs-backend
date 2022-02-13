@@ -12,34 +12,28 @@ export class CommentsController {
     ) {}
 
     @UseGuards(JwtAuthGuard)
-    @Post('create')
+    @Post(':eye_photo_id/create')
     createComment(
-        @Body() createCommentDto: CreateCommentDto
+        @Param('eye_photo_id') eye_photo_id: string,
+        @Body() createCommentDto: CreateCommentDto,
     ): Promise<Comments> {
-        return this.commentsService.createComment(createCommentDto)
-    }
-
-    @Get(':comment_id')
-    getCommentById(
-        @Param('comment_id') comment_id: string
-    ): Promise<Comments> {
-        return this.commentsService.getCommentById(comment_id)
+        return this.commentsService.createComment(eye_photo_id, createCommentDto)
     }
 
     @UseGuards(JwtAuthGuard)
-    @Patch(':comment_id/update')
+    @Patch(':eye_photo_id/update')
     updateComment(
-        @Param('comment_id') comment_id: string,
+        @Param(' eye_photo_id')  eye_photo_id: string,
         @Body() editCommentDto: EditCommentDto,
     ): Promise<Comments> {
-        return this.commentsService.updateComment(comment_id, editCommentDto)
+        return this.commentsService.updateComment( eye_photo_id, editCommentDto)
     }
 
     @UseGuards(JwtAuthGuard)
-    @Delete(':comment_id/delete')
+    @Delete(':eye_photo_id/delete')
     deleteComment(
-        @Param('comment_id') comment_id: string
+        @Param('eye_photo_id') eye_photo_id: string
     ): Promise<Comments> {
-        return this.commentsService.deleteComment(comment_id)
+        return this.commentsService.deleteComment(eye_photo_id)
     }
 }
