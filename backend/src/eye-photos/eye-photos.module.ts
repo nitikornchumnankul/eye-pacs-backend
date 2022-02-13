@@ -40,7 +40,8 @@ import { diskStorage } from 'multer';
     })
   ],
   providers: [EyePhotosService],
-  controllers: [EyePhotosController]
+  controllers: [EyePhotosController],
+  exports: [EyePhotosService],
 })
 export class EyePhotosModule {}
 

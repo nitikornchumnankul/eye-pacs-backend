@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { CreateTableDto } from './dto/create-table.dto';
 import { Table1 } from './table-1.entity';
@@ -11,8 +11,9 @@ export class Table1Controller {
     @UseGuards(JwtAuthGuard)
     @Post('create')
     createTable(
-        @Body() createTableDto: CreateTableDto
+        @Param('eye_photo_id') eye_photo_id: string,
+        @Body() createTableDto: CreateTableDto,
     ): Promise<Table1> {
-        return this.table1Service.createTable(createTableDto)
+        return this.table1Service.createTable(createTableDto, eye_photo_id)
     }
 }
