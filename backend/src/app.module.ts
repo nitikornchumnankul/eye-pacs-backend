@@ -17,6 +17,7 @@ import { Table7Module } from './table-7/table-7.module';
 import { Table8Module } from './table-8/table-8.module';
 import { Table9Module } from './table-9/table-9.module';
 import { Table10Module } from './table-10/table-10.module';
+import { Table11Module } from './table-11/table-11.module';
 
 @Module({
   imports: [
@@ -58,7 +59,8 @@ import { Table10Module } from './table-10/table-10.module';
     Table7Module,
     Table8Module,
     Table9Module,
-    Table10Module
+    Table10Module,
+    Table11Module
   ],
   controllers: [AppController],
   providers: [AppService],
