@@ -5,7 +5,7 @@ import { UpdateTableIrmaDto } from 'src/table-dto/update-table-irma.dto';
 import { Table6 } from './table-6.entity';
 import { Table6Service } from './table-6.service';
 
-@Controller('table_6')
+@Controller('table-6')
 export class Table6Controller {
     constructor(private table6Service: Table6Service) {}
 

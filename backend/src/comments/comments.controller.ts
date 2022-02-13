@@ -26,7 +26,15 @@ export class CommentsController {
         @Param(' eye_photo_id')  eye_photo_id: string,
         @Body() editCommentDto: EditCommentDto,
     ): Promise<Comments> {
-        return this.commentsService.updateComment( eye_photo_id, editCommentDto)
+        return this.commentsService.updateComment(eye_photo_id, editCommentDto)
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get(':eye_photo_id/get')
+    getComment(
+        @Param(' eye_photo_id')  eye_photo_id: string,
+    ): Promise<Comments> {
+        return this.commentsService.getComment(eye_photo_id)
     }
 
     @UseGuards(JwtAuthGuard)
