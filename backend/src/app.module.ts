@@ -9,6 +9,7 @@ import { EyePhotosModule } from './eye-photos/eye-photos.module';
 import { CommentsModule } from './comments/comments.module';
 import { Table1Module } from './table-1/table-1.module';
 import { Table2Module } from './table-2/table-2.module';
+import { Table3Module } from './table-3/table-3.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { Table2Module } from './table-2/table-2.module';
     EyePhotosModule,
     CommentsModule,
     Table1Module,
-    Table2Module
+    Table2Module,
+    Table3Module
   ],
   controllers: [AppController],
   providers: [AppService],
