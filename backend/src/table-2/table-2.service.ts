@@ -1,20 +1,20 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EyePhotosService } from 'src/eye-photos/eye-photos.service';
-import { CreateTableDto } from '../table-dto/create-table.dto';
-import { UpdateTableDto } from '../table-dto/update-table.dto';
-import { Table1 } from './table-1.entity';
-import { Table1Repository } from './table-1.repository';
+import { CreateTableDto } from 'src/table-dto/create-table.dto';
+import { UpdateTableDto } from 'src/table-dto/update-table.dto';
+import { Table2 } from './table-2.entity';
+import { Table2Repository } from './table-2.repository';
 
 @Injectable()
-export class Table1Service {
+export class Table2Service {
     constructor(
-        @InjectRepository(Table1Repository)
-        private table1Repository: Table1Repository,
+        @InjectRepository(Table2Repository)
+        private table2Repository: Table2Repository,
         private eyePhotosService: EyePhotosService,
     ) {}
 
-    async createTable(eye_photo_id: string, createTableDto: CreateTableDto): Promise<Table1> {
+    async createTable(createTableDto: CreateTableDto, eye_photo_id: string): Promise<Table2> {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { yes, cannot_grade } = createTableDto
@@ -26,16 +26,16 @@ export class Table1Service {
                 obj = { ...obj, cannot_grade: 1 }
             }
 
-            const table = this.table1Repository.create({ ...obj, eye_photo: photo })
-            return await this.table1Repository.save(table)
+            const table = this.table2Repository.create({ ...obj, eye_photo: photo })
+            return await this.table2Repository.save(table)
         } catch(e) {
             throw new BadRequestException({ message: 'Error, Can\'t create table.' })
         }
     }
 
-    async getTableById(table_1_id: string): Promise<Table1> {
+    async getTableById(table_1_id: string): Promise<Table2> {
         try {
-            const table = await this.table1Repository.findOne(table_1_id)
+            const table = await this.table2Repository.findOne(table_1_id)
             return table
         } catch(e) {
             throw new BadRequestException({
@@ -44,10 +44,10 @@ export class Table1Service {
         }
     }
 
-    async updateTable(eye_photo_id: string, updateTableDto: UpdateTableDto): Promise<Table1> {
+    async updateTable(eye_photo_id: string, updateTableDto: UpdateTableDto): Promise<Table2> {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
-            const table = await this.table1Repository.findOne({ where: { eye_photo } })
+            const table = await this.table2Repository.findOne({ where: { eye_photo } })
             const { yes, cannot_grade } = updateTableDto
 
             if(yes) {
@@ -58,7 +58,7 @@ export class Table1Service {
                 table.yes = 0
             }
 
-            return await this.table1Repository.save(table)
+            return await this.table2Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
                 message: 'Error, Table not found.'
