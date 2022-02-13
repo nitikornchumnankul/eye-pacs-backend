@@ -35,17 +35,6 @@ export class Table1Service {
         }
     }
 
-    async getTableById(table_1_id: string): Promise<Table1> {
-        try {
-            const table = await this.table1Repository.findOne(table_1_id)
-            return table
-        } catch(e) {
-            throw new BadRequestException({
-                message: 'Error, Table not found.'
-            })
-        }
-    }
-
     async updateTable(eye_photo_id: string, updateTableDto: UpdateTableDto): Promise<Table1> {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
@@ -65,7 +54,7 @@ export class Table1Service {
             return await this.table1Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
-                message: 'Error, Table not found.'
+                message: 'Error, Table can\'t update.'
             })
         }
     }

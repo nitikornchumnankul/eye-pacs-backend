@@ -66,7 +66,7 @@ export class Table4Service {
             return await this.table4Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
-                message: 'Error, Can\'t create table.'
+                message: 'Error, Table can\'t update.'
             })
         }
     }

@@ -3,18 +3,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EyePhotosService } from 'src/eye-photos/eye-photos.service';
 import { CreateTableDto } from 'src/table-dto/create-table.dto';
 import { UpdateTableDto } from 'src/table-dto/update-table.dto';
-import { Table2 } from './table-2.entity';
-import { Table2Repository } from './table-2.repository';
+import { Table5 } from './table-5.entity';
+import { Table5Repository } from './table-5.repository';
 
 @Injectable()
-export class Table2Service {
+export class Table5Service {
     constructor(
-        @InjectRepository(Table2Repository)
-        private table2Repository: Table2Repository,
+        @InjectRepository(Table5Repository)
+        private table5Repository: Table5Repository,
         private eyePhotosService: EyePhotosService,
     ) {}
 
-    async createTable(eye_photo_id: string, createTableDto: CreateTableDto): Promise<Table2> {
+    async createTable(eye_photo_id: string, createTableDto: CreateTableDto): Promise<Table5> {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { yes, cannot_grade } = createTableDto
@@ -28,17 +28,19 @@ export class Table2Service {
                 throw new BadRequestException()
             }
 
-            const table = this.table2Repository.create({ ...obj, eye_photo: photo })
-            return await this.table2Repository.save(table)
+            const table = this.table5Repository.create({ ...obj, eye_photo: photo })
+            return await this.table5Repository.save(table)
         } catch(e) {
-            throw new BadRequestException({ message: 'Error, Can\'t create table.' })
+            throw new BadRequestException({
+                message: 'Error, Can\'t create table.'
+            })
         }
     }
 
-    async updateTable(eye_photo_id: string, updateTableDto: UpdateTableDto): Promise<Table2> {
+    async updateTable(eye_photo_id: string, updateTableDto: UpdateTableDto): Promise<Table5> {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
-            const table = await this.table2Repository.findOne({ where: { eye_photo } })
+            const table = await this.table5Repository.findOne({ where: { eye_photo } })
             const { yes, cannot_grade } = updateTableDto
 
             if(yes) {
@@ -51,7 +53,7 @@ export class Table2Service {
                 throw new BadRequestException()
             }
 
-            return await this.table2Repository.save(table)
+            return await this.table5Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
                 message: 'Error, Table can\'t update.'
