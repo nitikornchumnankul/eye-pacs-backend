@@ -14,7 +14,7 @@ export class Table2Service {
         private eyePhotosService: EyePhotosService,
     ) {}
 
-    async createTable(createTableDto: CreateTableDto, eye_photo_id: string): Promise<Table2> {
+    async createTable(eye_photo_id: string, createTableDto: CreateTableDto): Promise<Table2> {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { yes, cannot_grade } = createTableDto
@@ -22,8 +22,10 @@ export class Table2Service {
 
             if(yes) {
                 obj = { ...obj, yes: 1 }
-            } else if(cannot_grade && !yes) {
+            } else if(cannot_grade) {
                 obj = { ...obj, cannot_grade: 1 }
+            } else {
+                throw new BadRequestException()
             }
 
             const table = this.table2Repository.create({ ...obj, eye_photo: photo })
@@ -53,9 +55,11 @@ export class Table2Service {
             if(yes) {
                 table.yes = 1
                 table.cannot_grade = 0
-            } else if(cannot_grade && !yes) {
-                table.cannot_grade = 1
+            } else if(cannot_grade) {
                 table.yes = 0
+                table.cannot_grade = 1
+            } else {
+                throw new BadRequestException()
             }
 
             return await this.table2Repository.save(table)

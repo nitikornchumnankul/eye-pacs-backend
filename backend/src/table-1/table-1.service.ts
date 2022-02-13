@@ -22,8 +22,10 @@ export class Table1Service {
 
             if(yes) {
                 obj = { ...obj, yes: 1 }
-            } else if(cannot_grade && !yes) {
+            } else if(cannot_grade) {
                 obj = { ...obj, cannot_grade: 1 }
+            } else {
+                throw new BadRequestException()
             }
 
             const table = this.table1Repository.create({ ...obj, eye_photo: photo })
@@ -53,9 +55,11 @@ export class Table1Service {
             if(yes) {
                 table.yes = 1
                 table.cannot_grade = 0
-            } else if(cannot_grade && !yes) {
-                table.cannot_grade = 1
+            } else if(cannot_grade) {
                 table.yes = 0
+                table.cannot_grade = 1
+            } else {
+                throw new BadRequestException()
             }
 
             return await this.table1Repository.save(table)

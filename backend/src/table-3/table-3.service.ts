@@ -14,7 +14,7 @@ export class Table3Service {
         private eyePhotosService: EyePhotosService,
     ) {}
 
-    async createTable(createTableDto: CreateTableDto, eye_photo_id: string): Promise<Table3> {
+    async createTable(eye_photo_id: string, createTableDto: CreateTableDto): Promise<Table3> {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { yes, cannot_grade } = createTableDto
@@ -22,14 +22,18 @@ export class Table3Service {
 
             if(yes) {
                 obj = { ...obj, yes: 1 }
-            } else if(cannot_grade && !yes) {
+            } else if(cannot_grade) {
                 obj = { ...obj, cannot_grade: 1 }
+            } else {
+                throw new BadRequestException()
             }
 
             const table = this.table3Repository.create({ ...obj, eye_photo: photo })
             return await this.table3Repository.save(table)
         } catch(e) {
-            throw new BadRequestException({ message: 'Error, Can\'t create table.' })
+            throw new BadRequestException({
+                message: 'Error, Can\'t create table.'
+            })
         }
     }
 
@@ -53,9 +57,11 @@ export class Table3Service {
             if(yes) {
                 table.yes = 1
                 table.cannot_grade = 0
-            } else if(cannot_grade && !yes) {
-                table.cannot_grade = 1
+            } else if(cannot_grade) {
                 table.yes = 0
+                table.cannot_grade = 1
+            } else {
+                throw new BadRequestException()
             }
 
             return await this.table3Repository.save(table)

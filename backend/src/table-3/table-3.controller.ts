@@ -15,7 +15,7 @@ export class Table3Controller {
         @Param('eye_photo_id') eye_photo_id: string,
         @Body() createTableDto: CreateTableDto,
     ): Promise<Table3> {
-        return this.table3Service.createTable(createTableDto, eye_photo_id)
+        return this.table3Service.createTable(eye_photo_id, createTableDto)
     }
 
     @UseGuards(JwtAuthGuard)
