@@ -12,6 +12,7 @@ import { Table2Module } from './table-2/table-2.module';
 import { Table3Module } from './table-3/table-3.module';
 import { Table4Module } from './table-4/table-4.module';
 import { Table5Module } from './table-5/table-5.module';
+import { Table6Module } from './table-6/table-6.module';
 
 @Module({
   imports: [
@@ -48,7 +49,8 @@ import { Table5Module } from './table-5/table-5.module';
     Table2Module,
     Table3Module,
     Table4Module,
-    Table5Module
+    Table5Module,
+    Table6Module
   ],
   controllers: [AppController],
   providers: [AppService],

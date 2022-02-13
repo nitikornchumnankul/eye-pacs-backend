@@ -1,4 +1,5 @@
 // Microaneurysms ONLY (MA)
+
 import { EyePhotos } from "src/eye-photos/eye-photos.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
