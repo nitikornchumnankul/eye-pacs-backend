@@ -12,9 +12,9 @@ export class Table1 {
     @Column()
     eyeside: EyeSide
 
-    @Column({ default: 0 })
+    @Column({ type: 'integer', default: 0 })
     yes: number
     
-    @Column({ default: 0 })
+    @Column({ type: 'integer', default: 0 })
     cannot_grade: number
 }

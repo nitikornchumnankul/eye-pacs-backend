@@ -4,6 +4,8 @@ import { SearchEyePhotosDto } from './dto/search-eye-photos.dto';
 import { EyePhotos } from './eye-photos.entity';
 import { EyePhotosRepository } from './eye-photos.repository';
 import * as fs from 'fs'
+import { UpdateEyeSideDto } from './dto/update-eyeside.dto';
+import { UpdateEyeStatusDto } from './dto/update-eye-status.dto';
 
 @Injectable()
 export class EyePhotosService {
@@ -61,6 +63,36 @@ export class EyePhotosService {
         } catch(e) {
             throw new NotFoundException({
                 message: 'Error, Eye photos are empty.'
+            })
+        }
+    }
+
+    async updateEyeSide(eye_photo_id: string, updateEyeSideDto: UpdateEyeSideDto): Promise<EyePhotos> {
+        try {
+            const photo = await this.getEyePhotoById(eye_photo_id)
+
+            const { eyeside } = updateEyeSideDto
+            photo.eyeside = eyeside
+
+            return await this.eyePhotosRepository.save(photo)
+        } catch(e) {
+            throw new NotFoundException({
+                message: 'Error, Eye photo not found.'
+            })
+        }
+    }
+
+    async updateEyeStatus(eye_photo_id: string, updateEyeStatusDto: UpdateEyeStatusDto): Promise<EyePhotos> {
+        try {
+            const photo = await this.getEyePhotoById(eye_photo_id)
+
+            const { status } = updateEyeStatusDto
+            photo.status = status
+
+            return await this.eyePhotosRepository.save(photo)
+        } catch(e) {
+            throw new NotFoundException({
+                message: 'Error, Eye photo not found.'
             })
         }
     }

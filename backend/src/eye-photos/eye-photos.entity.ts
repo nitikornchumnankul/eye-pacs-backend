@@ -1,5 +1,7 @@
+import { EyeSide } from "src/enum/eyeside.enum";
 import { Status } from "src/enum/status.enum";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Table1 } from "src/table-1/table-1.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
 
 @Entity({ name: 'eye_photos' })
 export class EyePhotos {
@@ -10,6 +12,13 @@ export class EyePhotos {
     @Column()
     path: string
 
+    @Column({ nullable: true })
+    eyeside: EyeSide
+
     @Column({ default: Status.inPorgress })
     status: Status
+
+    @OneToOne(() => Table1)
+    @JoinColumn({ name: 'table_1_id' })
+    table_1: Table1
 }
