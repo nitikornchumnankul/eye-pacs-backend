@@ -13,7 +13,9 @@
   cd EyePACS/backend&&yarn install
 ```
 
-<p>จากนั้นทำการเปิด pgAdmin ที่ได้ทำการติดตั้งจาก PostgresSQL แล้วทำการ Run Project โดยใช้คำสั่ง</p>
+<h2>Start the project</h2>
+
+<p>ก่อน Run Project ให้ทำการเปิด <strong><i>pgAdmin</i></strong> ก่อนทุกครั้ง</p>
 
 ```bash
   yarn start:dev
