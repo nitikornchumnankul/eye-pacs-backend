@@ -123,7 +123,7 @@ http://localhost:3000/eye-photos/:eye_photo_id
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
 
 ```javascript
-export const getEyePhotos = (eye_photo_id) => {
+export const getEyePhotoById = (eye_photo_id) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/eye-photos/${eye_photo_id}`)
@@ -145,7 +145,7 @@ http://localhost:3000/eye-photos/:eye_photo_id/update/eyeside
 
 ```javascript
 // eyeside is enum of 'LEFT' or 'RIGHT'
-export const getEyePhotos = (eye_photo_id, eyeside) => {
+export const updateEyeSide = (eye_photo_id, eyeside) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
@@ -170,7 +170,7 @@ http://localhost:3000/eye-photos/:eye_photo_id/update/status
 
 ```javascript
 // status is enum of 'DONE' or 'IN_PROGRESS'
-export const getEyePhotos = (eye_photo_id, status) => {
+export const updateEyeStatus = (eye_photo_id, status) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
@@ -198,7 +198,7 @@ http://localhost:3000/table-n/:eye_photo_id/create
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
 
 ```javascript
-export const getEyePhotos = (eye_photo_id, yes, cannot_grade) => {
+export const createTableN = (eye_photo_id, yes, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/table-n/${eye_photo_id}/create`,
@@ -213,7 +213,7 @@ export const getEyePhotos = (eye_photo_id, yes, cannot_grade) => {
 }
 ```
 
-<li><strong>Create table-n</strong></li><br>
+<li><strong>Update table-n</strong></li><br>
 
 ```
 http://localhost:3000/table-n/:eye_photo_id/update
@@ -222,7 +222,7 @@ http://localhost:3000/table-n/:eye_photo_id/update
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
 
 ```javascript
-export const getEyePhotos = (eye_photo_id, yes, cannot_grade) => {
+export const updateTableN = (eye_photo_id, yes, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/table-n/${eye_photo_id}/update`,
@@ -236,3 +236,52 @@ export const getEyePhotos = (eye_photo_id, yes, cannot_grade) => {
     })
 }
 ```
+
+<h2 id="table-4">table-4</h2>
+
+<li><strong>Create table-4</strong></li><br>
+
+```
+http://localhost:3000/table-4/:eye_photo_id/create
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const createTable4 = (eye_photo_id, lower_2a, upper_2a, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-4/${eye_photo_id}/create`,
+                { lower_2a, upper_2a, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Update table-4</strong></li><br>
+
+```
+http://localhost:3000/table-4/:eye_photo_id/update
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const updateTable4 = (eye_photo_id, lower_2a, upper_2a, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-4/${eye_photo_id}/update`,
+                { lower_2a, upper_2a, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
