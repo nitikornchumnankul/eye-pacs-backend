@@ -618,3 +618,58 @@ export const deleteComment = (eye_photo_id) => {
     })
 }
 ```
+
+<h2 id="users">users</h2>
+
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+username: string
+password: string
+```
+
+<li><strong>Register</strong></li><br>
+
+```
+http://localhost:3000/register
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const register = (username, password, passwordConfirm) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/register`,
+                { username, password, passwordConfirm },
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Login</strong></li><br>
+
+```
+http://localhost:3000/login
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const login = (username, password) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/login`,
+                { username, password },
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
