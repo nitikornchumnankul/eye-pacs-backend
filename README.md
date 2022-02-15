@@ -41,6 +41,9 @@ PHOTOS_PATH=./uploads/eye-photos
 3000
 ```
 
+<h2>Enitiy Relation</h2>
+<a href="https://drive.google.com/file/d/1WDyPYbReQN8f__Nu1PCawRcluQD6iq28/view?usp=sharing">Click Here</a>
+
 <h2>API lists</h2>
 <p>*** ฝั่ง Frontend ควรทำการติดตั้ง <strong>axios</strong> เพื่อความสะดวกในการเรียกใช้ API<br>
 *** table ทุก table มีการใช้งาน API ที่เหมือนกันหมด ยกเว้น table ที่พิเศษคือ 4, 6, 12, 13<br>
