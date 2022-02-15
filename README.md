@@ -431,3 +431,64 @@ export const updateTable12 = (eye_photo_id, lower_2DD, lower_1DD, cannot_grade) 
     })
 }
 ```
+
+<h2 id="table-13">table-13</h2>
+
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+eye_photo_id: string
+cataract: boolean
+glaucoma: boolean
+occlusion: boolean
+maculopathy: boolean
+other: boolean
+```
+
+<li><strong>Create table-12</strong></li><br>
+
+```
+http://localhost:3000/table-13/:eye_photo_id/create
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const createTable13 = (eye_photo_id, cataract, glaucoma, occlusion, maculopathy, other, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-13/${eye_photo_id}/create`,
+                { cataract, glaucoma, occlusion, maculopathy, other, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Update table-12</strong></li><br>
+
+```
+http://localhost:3000/table-13/:eye_photo_id/update
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const updateTable13 = (eye_photo_id, cataract, glaucoma, occlusion, maculopathy, other, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-13/${eye_photo_id}/update`,
+                { cataract, glaucoma, occlusion, maculopathy, other, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
