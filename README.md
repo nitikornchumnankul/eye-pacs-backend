@@ -57,6 +57,16 @@ PHOTOS_PATH=./uploads/eye-photos
 
 <h2 id="eye-photos">eye-photos</h2>
 
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+images: new FormData()
+search: string
+eye_photo_id: string
+eyeside: enum.EyeSide
+status: enum.Status
+```
+
 <li><strong>Upload eye photos</strong></li><br>
 
 ```
@@ -187,6 +197,14 @@ export const updateEyeStatus = (eye_photo_id, status) => {
 
 <h2 id="table-n">table-n</h2>
 
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+eye_photo_id: string
+yes: boolean
+cannot_grade: boolean
+```
+
 <li><strong>Create table-n</strong></li><br>
 
 <p>อย่าลืมเปลี่ยน n นะครับ</p>
@@ -238,6 +256,15 @@ export const updateTableN = (eye_photo_id, yes, cannot_grade) => {
 ```
 
 <h2 id="table-4">table-4</h2>
+
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+eye_photo_id: string
+lower_2a: boolean
+upper_2a: boolean
+cannot_grade: boolean
+```
 
 <li><strong>Create table-4</strong></li><br>
 
