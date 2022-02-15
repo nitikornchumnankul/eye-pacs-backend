@@ -445,7 +445,7 @@ maculopathy: boolean
 other: boolean
 ```
 
-<li><strong>Create table-12</strong></li><br>
+<li><strong>Create table-13</strong></li><br>
 
 ```
 http://localhost:3000/table-13/:eye_photo_id/create
@@ -469,7 +469,7 @@ export const createTable13 = (eye_photo_id, cataract, glaucoma, occlusion, macul
 }
 ```
 
-<li><strong>Update table-12</strong></li><br>
+<li><strong>Update table-13</strong></li><br>
 
 ```
 http://localhost:3000/table-13/:eye_photo_id/update
