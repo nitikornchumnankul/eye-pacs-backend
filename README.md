@@ -42,20 +42,15 @@ PHOTOS_PATH=./uploads/eye-photos
 ```
 
 <h2>API lists</h2>
-<p>*** ฝั่ง Frontend ควรทำการติดตั้ง <strong>axios</strong> เพื่อความสะดวกในการเรียกใช้ API</p>
+<p>*** ฝั่ง Frontend ควรทำการติดตั้ง <strong>axios</strong> เพื่อความสะดวกในการเรียกใช้ API<br>
+*** table ทุก table มีการใช้งาน API ที่เหมือนกันหมด ยกเว้น table ที่พิเศษคือ 4, 6, 12, 13<br>
+*** ใช้เลขแทน table ทั่วไปเป็น n โดยที่ n หมายถึงจำนวนนับ 1, 2, 3, ...
+</p>
 <ul>
   <li><a href="#eye-photos">eye-photos</a></li>
-  <li><a href="#table-1">table-1</a></li>
-  <li><a href="#table-2">table-2</a></li>
-  <li><a href="#table-3">table-3</a></li>
+  <li><a href="#table-n">table-n</a></li>
   <li><a href="#table-4">table-4</a></li>
-  <li><a href="#table-5">table-5</a></li>
   <li><a href="#table-6">table-6</a></li>
-  <li><a href="#table-7">table-7</a></li>
-  <li><a href="#table-8">table-8</a></li>
-  <li><a href="#table-9">table-9</a></li>
-  <li><a href="#table-10">table-10</a></li>
-  <li><a href="#table-11">table-11</a></li>
   <li><a href="#table-12">table-12</a></li>
   <li><a href="#table-13">table-13</a></li>
 </ul>
@@ -143,7 +138,7 @@ export const getEyePhotos = (eye_photo_id) => {
 <li><strong>Update eyeside</strong></li><br>
 
 ```
-http://localhost:3000/:eye_photo_id/update/eyeside
+http://localhost:3000/eye-photos/:eye_photo_id/update/eyeside
 ```
 
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
@@ -168,7 +163,7 @@ export const getEyePhotos = (eye_photo_id, eyeside) => {
 <li><strong>Update eyes status</strong></li><br>
 
 ```
-http://localhost:3000/:eye_photo_id/update/status
+http://localhost:3000/eye-photos/:eye_photo_id/update/status
 ```
 
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
@@ -180,6 +175,58 @@ export const getEyePhotos = (eye_photo_id, status) => {
         try {
             const res = await axios.post(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
                 { status },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<h2 id="table-n">table-n</h2>
+
+<li><strong>Create table-n</strong></li><br>
+
+<p>อย่าลืมเปลี่ยน n นะครับ</p>
+
+```
+http://localhost:3000/table-n/:eye_photo_id/create
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const getEyePhotos = (eye_photo_id, yes, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-n/${eye_photo_id}/create`,
+                { yes, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Create table-n</strong></li><br>
+
+```
+http://localhost:3000/table-n/:eye_photo_id/update
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const getEyePhotos = (eye_photo_id, yes, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-n/${eye_photo_id}/update`,
+                { yes, cannot_grade },
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
             resolve(res.data)
