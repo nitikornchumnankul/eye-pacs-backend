@@ -393,7 +393,7 @@ http://localhost:3000/table-12/:eye_photo_id/create
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
 
 ```javascript
-export const createTable6 = (eye_photo_id, lower_2DD, lower_1DD, cannot_grade) => {
+export const createTable12 = (eye_photo_id, lower_2DD, lower_1DD, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/table-12/${eye_photo_id}/create`,
@@ -417,7 +417,7 @@ http://localhost:3000/table-12/:eye_photo_id/update
 <p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
 
 ```javascript
-export const updateTable6 = (eye_photo_id, lower_2DD, lower_1DD, cannot_grade) => {
+export const updateTable12 = (eye_photo_id, lower_2DD, lower_1DD, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await axios.post(`http://localhost:3000/table-12/${eye_photo_id}/update`,
