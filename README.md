@@ -312,3 +312,62 @@ export const updateTable4 = (eye_photo_id, lower_2a, upper_2a, cannot_grade) => 
         }
     })
 }
+```
+
+<h2 id="table-6">table-6</h2>
+
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+eye_photo_id: string
+lower_8a: boolean
+upper_8a: boolean
+cannot_grade: boolean
+```
+
+<li><strong>Create table-6</strong></li><br>
+
+```
+http://localhost:3000/table-6/:eye_photo_id/create
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const createTable6 = (eye_photo_id, lower_8a, upper_8a, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-6/${eye_photo_id}/create`,
+                { lower_8a, upper_8a, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Update table-6</strong></li><br>
+
+```
+http://localhost:3000/table-6/:eye_photo_id/update
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const updateTable6 = (eye_photo_id, lower_8a, upper_8a, cannot_grade) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/table-6/${eye_photo_id}/update`,
+                { lower_2a, upper_2a, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
