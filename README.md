@@ -53,6 +53,8 @@ PHOTOS_PATH=./uploads/eye-photos
   <li><a href="#table-6">table-6</a></li>
   <li><a href="#table-12">table-12</a></li>
   <li><a href="#table-13">table-13</a></li>
+  <li><a href="#comments">comments</a></li>
+  <li><a href="#users">users</a></li>
 </ul>
 
 <h2 id="eye-photos">eye-photos</h2>
@@ -115,7 +117,7 @@ http://localhost:3000/eye-photos?search=<query>
 export const getEyePhotos = (search) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/eye-photos${search}`)
+            const res = await axios.get(`http://localhost:3000/eye-photos${search}`)
             resolve(res.data)
         } catch(e) {
             reject(e.response.data)
@@ -136,7 +138,7 @@ http://localhost:3000/eye-photos/:eye_photo_id
 export const getEyePhotoById = (eye_photo_id) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/eye-photos/${eye_photo_id}`)
+            const res = await axios.get(`http://localhost:3000/eye-photos/${eye_photo_id}`)
             resolve(res.data)
         } catch(e) {
             reject(e.response.data)
@@ -158,7 +160,7 @@ http://localhost:3000/eye-photos/:eye_photo_id/update/eyeside
 export const updateEyeSide = (eye_photo_id, eyeside) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
+            const res = await axios.patch(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
                 { eyeside },
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
@@ -183,8 +185,31 @@ http://localhost:3000/eye-photos/:eye_photo_id/update/status
 export const updateEyeStatus = (eye_photo_id, status) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
+            const res = await axios.patch(`http://localhost:3000/${eye_photo_id}/update/eyeside`,
                 { status },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Delete eye photo</strong></li><br>
+
+```
+http://localhost:3000/eye-photos/:eye_photo_id/delete
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const deleteEyePhoto = (eye_photo_id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.delete(`http://localhost:3000/${eye_photo_id}/delete`,
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
             resolve(res.data)
@@ -243,7 +268,7 @@ http://localhost:3000/table-n/:eye_photo_id/update
 export const updateTableN = (eye_photo_id, yes, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/table-n/${eye_photo_id}/update`,
+            const res = await axios.patch(`http://localhost:3000/table-n/${eye_photo_id}/update`,
                 { yes, cannot_grade },
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
@@ -302,7 +327,7 @@ http://localhost:3000/table-4/:eye_photo_id/update
 export const updateTable4 = (eye_photo_id, lower_2a, upper_2a, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/table-4/${eye_photo_id}/update`,
+            const res = await axios.patch(`http://localhost:3000/table-4/${eye_photo_id}/update`,
                 { lower_2a, upper_2a, cannot_grade },
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
@@ -361,7 +386,7 @@ http://localhost:3000/table-6/:eye_photo_id/update
 export const updateTable6 = (eye_photo_id, lower_8a, upper_8a, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/table-6/${eye_photo_id}/update`,
+            const res = await axios.patch(`http://localhost:3000/table-6/${eye_photo_id}/update`,
                 { lower_2a, upper_2a, cannot_grade },
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
@@ -420,7 +445,7 @@ http://localhost:3000/table-12/:eye_photo_id/update
 export const updateTable12 = (eye_photo_id, lower_2DD, lower_1DD, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/table-12/${eye_photo_id}/update`,
+            const res = await axios.patch(`http://localhost:3000/table-12/${eye_photo_id}/update`,
                 { lower_2DD, lower_1DD, cannot_grade },
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
@@ -481,8 +506,109 @@ http://localhost:3000/table-13/:eye_photo_id/update
 export const updateTable13 = (eye_photo_id, cataract, glaucoma, occlusion, maculopathy, other, cannot_grade) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(`http://localhost:3000/table-13/${eye_photo_id}/update`,
+            const res = await axios.patch(`http://localhost:3000/table-13/${eye_photo_id}/update`,
                 { cataract, glaucoma, occlusion, maculopathy, other, cannot_grade },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<h2 id="comments">comments</h2>
+
+<li><strong>Data Type</strong></li><br>
+
+```javascript
+eye_photo_id: string
+description: string
+```
+
+<li><strong>Create comment</strong></li><br>
+
+```
+http://localhost:3000/comments/:eye_photo_id/create
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const createComment = (eye_photo_id, description) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/comments/:eye_photo_id/${eye_photo_id}/create`,
+                { description },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Update comment</strong></li><br>
+
+```
+http://localhost:3000/comments/:eye_photo_id/update
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const updateComment = (eye_photo_id, description) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.patch(`http://localhost:3000/comments/:eye_photo_id/${eye_photo_id}/update`,
+                { description },
+                { headers: { "Authorization": `Bearer ${accessToken}` } }
+            )
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Get comment by id</strong></li><br>
+
+```
+http://localhost:3000/comments/:eye_photo_id/get
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const updateComment = (eye_photo_id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.get(`http://localhost:3000/comments/:eye_photo_id/${eye_photo_id}/get`)
+            resolve(res.data)
+        } catch(e) {
+            reject(e.response.data)
+        }
+    })
+}
+```
+
+<li><strong>Delete comment</strong></li><br>
+
+```
+http://localhost:3000/comments/:eye_photo_id/delete
+```
+
+<p>ตัวอย่าง code สำหรับฝั่ง Frontend</p>
+
+```javascript
+export const deleteComment = (eye_photo_id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.delete(`http://localhost:3000/comments/:eye_photo_id/${eye_photo_id}/delete`,
                 { headers: { "Authorization": `Bearer ${accessToken}` } }
             )
             resolve(res.data)
