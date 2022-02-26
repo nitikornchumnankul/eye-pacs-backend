@@ -29,7 +29,7 @@ import { diskStorage } from 'multer';
           storage: diskStorage({
             destination: configService.get('PHOTOS_PATH'),
             filename: (req, file, cb) => {
-              const filename: string = `${uuidv4()}`
+              const filename: string = path.parse(file.originalname).name
               const extension: string = path.parse(file.originalname).ext
 
               cb(null, `${filename}${extension}`)
