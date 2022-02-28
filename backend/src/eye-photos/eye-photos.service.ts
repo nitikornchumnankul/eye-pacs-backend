@@ -117,4 +117,20 @@ export class EyePhotosService {
             })
         }
     }
+
+    async deleteEyePhotoAll(): Promise<string> {
+        try {
+            const photos = await this.eyePhotosRepository.find()
+            for(let i=0; i<photos.length; i++) {
+                await this.eyePhotosRepository.delete(photos[i].eye_photo_id)
+                fs.unlinkSync(photos[i].path)
+            }
+
+            return "success"
+        } catch(e) {
+            throw new NotFoundException({
+                message: 'Error, Eye photo not found.'
+            })
+        }
+    }
 }

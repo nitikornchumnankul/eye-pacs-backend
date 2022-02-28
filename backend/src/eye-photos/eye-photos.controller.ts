@@ -59,4 +59,10 @@ export class EyePhotosController {
     ): Promise<EyePhotos> {
         return this.eyePhotosService.deleteEyePhoto(eye_photo_id)
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete('delete-all')
+    deleteEyePhotoAll(): Promise<string> {
+        return this.eyePhotosService.deleteEyePhotoAll()
+    }
 }
