@@ -1,6 +1,6 @@
 import { EyeSide } from "src/enum/eyeside.enum";
 import { Status } from "src/enum/status.enum";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn, CreateDateColumn } from "typeorm";
 
 @Entity({ name: 'eye_photos' })
 export class EyePhotos {
@@ -16,4 +16,7 @@ export class EyePhotos {
 
     @Column({ default: Status.inPorgress })
     status: Status
+
+    @CreateDateColumn()
+    created: Date
 }
