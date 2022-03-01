@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Res, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { SearchEyePhotosDto } from './dto/search-eye-photos.dto';
@@ -32,6 +32,14 @@ export class EyePhotosController {
         @Param('eye_photo_id') eye_photo_id: string
     ): Promise<EyePhotos> {
         return this.eyePhotosService.getEyePhotoById(eye_photo_id)
+    }
+
+    @Get('image/:eye_photo_id')
+    getEyePhotoImage(
+        @Param('eye_photo_id') eye_photo_id: string,
+        @Res() res,
+    ){
+        return res.sendFile(eye_photo_id, { root: 'uploads/eye-photos' })
     }
 
     @UseGuards(JwtAuthGuard)
