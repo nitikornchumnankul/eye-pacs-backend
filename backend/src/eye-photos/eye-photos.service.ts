@@ -24,7 +24,7 @@ export class EyePhotosService {
                 } = files[i]
 
                 let photo = this.eyePhotosRepository.create({
-                    eye_photo_id: filename.match(/.*(?=\.(gif|png|jpg|jpeg))/)[0],
+                    eye_photo_id: filename,
                     path,
                 })
 
