@@ -13,6 +13,7 @@ import { Table4Service } from './table-4.service';
     ]),
   ],
   controllers: [Table4Controller],
-  providers: [Table4Service]
+  providers: [Table4Service],
+  exports: [Table4Service]
 })
 export class Table4Module {}

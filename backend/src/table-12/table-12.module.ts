@@ -13,6 +13,7 @@ import { Table12Service } from './table-12.service';
     ]),
   ],
   controllers: [Table12Controller],
-  providers: [Table12Service]
+  providers: [Table12Service],
+  exports: [Table12Service]
 })
 export class Table12Module {}

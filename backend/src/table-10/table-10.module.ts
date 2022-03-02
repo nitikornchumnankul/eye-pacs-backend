@@ -13,6 +13,7 @@ import { Table10Service } from './table-10.service';
     ]),
   ],
   controllers: [Table10Controller],
-  providers: [Table10Service]
+  providers: [Table10Service],
+  exports: [Table10Service]
 })
 export class Table10Module {}

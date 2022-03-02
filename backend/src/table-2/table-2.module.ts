@@ -13,6 +13,7 @@ import { Table2Repository } from './table-2.repository';
     ]),
   ],
   providers: [Table2Service],
-  controllers: [Table2Controller]
+  controllers: [Table2Controller],
+  exports: [Table2Service]
 })
 export class Table2Module {}

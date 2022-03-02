@@ -1,5 +1,7 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Request, UseGuards } from '@nestjs/common';
+import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
+import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 // import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local/local-auth.guard';
 import { RegisterDto } from './users/dto/register.dto';
@@ -10,6 +12,7 @@ export class AppController {
   constructor(
     private usersService: UsersService,
     private authService: AuthService,
+    private appService: AppService,
   ) {}
 
   @Post('register')
@@ -27,10 +30,12 @@ export class AppController {
     return this.authService.login(req.user)
   }
 
-  // Check payload
-  // @UseGuards(JwtAuthGuard)
-  // @Get('profile')
-  // getProfile(@Request() req: any) {
-  //   return req.user
-  // }
+  // Delete all
+  @UseGuards(JwtAuthGuard)
+  @Delete('delete-all-table/:eye_photo_id')
+  deleteAllTable(
+    @Param('eye_photo_id') eye_photo_id: string
+  ): Promise<string> {
+    return this.appService.deleteAllTable(eye_photo_id)
+  }
 }

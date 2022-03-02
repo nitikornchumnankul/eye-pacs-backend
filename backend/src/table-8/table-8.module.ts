@@ -13,6 +13,7 @@ import { Table8Service } from './table-8.service';
     ])
   ],
   controllers: [Table8Controller],
-  providers: [Table8Service]
+  providers: [Table8Service],
+  exports: [Table8Service]
 })
 export class Table8Module {}

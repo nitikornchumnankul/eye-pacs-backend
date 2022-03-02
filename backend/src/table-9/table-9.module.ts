@@ -13,6 +13,7 @@ import { EyePhotosModule } from 'src/eye-photos/eye-photos.module';
     ])
   ],
   providers: [Table9Service],
-  controllers: [Table9Controller]
+  controllers: [Table9Controller],
+  exports: [Table9Service]
 })
 export class Table9Module {}

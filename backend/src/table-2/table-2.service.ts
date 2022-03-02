@@ -58,4 +58,17 @@ export class Table2Service {
             })
         }
     }
+
+    async deleteTable(eye_photo_id: string): Promise<string> {
+        try {
+            const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
+            const table = await this.table2Repository.findOne({ where: { eye_photo } })
+            await this.table2Repository.delete(table.table_2_id)
+            return "success"
+        } catch(e) {
+            throw new BadRequestException({
+                message: 'Error, Table can\'t delete.'
+            })
+        }
+    }
 }
