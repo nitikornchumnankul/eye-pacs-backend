@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { CreateTableHmaDto } from 'src/table-dto/create-table-hma.dto';
 import { UpdateTableHmaDto } from 'src/table-dto/update-table-hma.dto';
@@ -25,5 +25,12 @@ export class Table4Controller {
         @Body() updateTableHmaDto: UpdateTableHmaDto,
     ): Promise<Table4> {
         return this.table4Service.updateTable(eye_photo_id, updateTableHmaDto)
+    }
+
+    @Get(':eye_photo_id/get')
+    getTable(
+        @Param('eye_photo_id') eye_photo_id: string
+    ): Promise<Table4> {
+        return this.table4Service.getTable(eye_photo_id)
     }
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EyePhotosService } from 'src/eye-photos/eye-photos.service';
 import { CreateTableDto } from 'src/table-dto/create-table.dto';
@@ -34,6 +34,15 @@ export class Table5Service {
             throw new BadRequestException({
                 message: 'Error, Can\'t create table.'
             })
+        }
+    }
+
+    async getTable(eye_photo_id: string): Promise<Table5> {
+        try {
+            const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
+            return await this.table5Repository.findOne({ where: { eye_photo } })
+        } catch(e) {
+            throw new NotFoundException()
         }
     }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { CreateTableDto } from 'src/table-dto/create-table.dto';
 import { UpdateTableDto } from 'src/table-dto/update-table.dto';
@@ -25,5 +25,12 @@ export class Table11Controller {
         @Body() updateTableDto: UpdateTableDto,
     ): Promise<Table11> {
         return this.table11Service.updateTable(eye_photo_id, updateTableDto)
+    }
+
+    @Get(':eye_photo_id/get')
+    getTable(
+        @Param('eye_photo_id') eye_photo_id: string
+    ): Promise<Table11> {
+        return this.table11Service.getTable(eye_photo_id)
     }
 }
