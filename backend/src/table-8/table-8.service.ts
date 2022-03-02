@@ -65,6 +65,9 @@ export class Table8Service {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const table = await this.table8Repository.findOne({ where: { eye_photo } })
+            if(!table) {
+                return "success"
+            }
             await this.table8Repository.delete(table.table_8_id)
             return "success"
         } catch(e) {

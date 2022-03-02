@@ -30,7 +30,6 @@ export class AppService {
     private table11Service: Table11Service,
     private table12Service: Table12Service,
     private table13Service: Table13Service,
-    private eyePhotosService: EyePhotosService,
   ) {}
 
   async deleteAllTable(eye_photo_id: string): Promise<string> {

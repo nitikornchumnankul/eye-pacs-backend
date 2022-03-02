@@ -75,6 +75,9 @@ export class Table4Service {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const table = await this.table4Repository.findOne({ where: { eye_photo } })
+            if(!table) {
+                return "success"
+            }
             await this.table4Repository.delete(table.table_4_id)
             return "success"
         } catch(e) {
