@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Param, Post, Request, UseGuards } from '
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
-// import { JwtAuthGuard } from './auth/jwt/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local/local-auth.guard';
 import { RegisterDto } from './users/dto/register.dto';
 import { UsersService } from './users/users.service';
@@ -20,6 +19,11 @@ export class AppController {
     @Body() registerDto: RegisterDto
   ): Promise<any> {
     return this.usersService.register(registerDto)
+  }
+
+  @Get('export')
+  exportToCSV(): Promise<any> {
+    return this.appService.exportToCSV()
   }
 
   @UseGuards(LocalAuthGuard)
