@@ -28,6 +28,9 @@ import { Table8Service } from './table-8/table-8.service';
 import { Table9Repository } from './table-9/table-9.repository';
 import { Table9Service } from './table-9/table-9.service';
 import { Eye } from './users/table-interface';
+import * as fs from 'fs'
+import { ConfigService } from '@nestjs/config';
+import * as json2csv from 'json2csv'
 
 @Injectable()
 export class AppService {
@@ -87,6 +90,8 @@ export class AppService {
     private table11Service: Table11Service,
     private table12Service: Table12Service,
     private table13Service: Table13Service,
+
+    private configService: ConfigService,
   ) {}
 
   async deleteAllTable(eye_photo_id: string): Promise<string> {
@@ -181,6 +186,7 @@ export class AppService {
         .leftJoinAndSelect('table_13.eye_photo', 'eye_photo')
       const table_13 = await table_13_query.getMany()
       
+      const export_path = this.configService.get('EXPORT_PATH')
       let output: Eye[] = []
       for(let i=0; i<table_1.length; i++) {
         output.push(
@@ -235,7 +241,11 @@ export class AppService {
         )
       }
 
-      return output
+      let record = new Date()
+      const json2csvParser = new json2csv.Parser()
+      const csv = json2csvParser.parse(output)
+      fs.writeFileSync(`${export_path}/${record.toISOString().split('T')[0]}_eye_data.csv`, csv)
+      return `${record.toISOString().split('T')[0]}_eye_data.csv`
     } catch(e) {
       throw new BadRequestException({
         message: 'Error, cant\'t export file.'

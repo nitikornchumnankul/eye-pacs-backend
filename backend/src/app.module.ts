@@ -84,6 +84,7 @@ import { Table13Repository } from './table-13/table-13.repository';
     }),
 
     // Module
+    ConfigModule,
     AuthModule,
     UsersModule,
     EyePhotosModule,
