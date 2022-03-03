@@ -28,7 +28,7 @@ export class AppController {
     const results = await this.appService.exportToCSV()
     const file = createReadStream(join(`${process.cwd()}/export`, results))
     res.set({
-      'Content-Disposition': `attachment; filename="${results}"`,
+      'Content-Disposition': `attachment; filename="${Date.now()}_eye_data.csv"`,
     })
     return new StreamableFile(file)
   }
