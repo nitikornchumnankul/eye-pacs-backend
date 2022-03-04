@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { EyePhotosService } from 'src/eye-photos/eye-photos.service';
 import { Table14Dto } from './dto/table14.dto';
+import { UpdateTable14Dto } from './dto/update-table14.dto';
 import { Table14 } from './table-14.entity';
 import { Table14Repository } from './table14.repository';
 
@@ -17,27 +18,8 @@ export class Table14Service {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const {
-                cataract,
-                glaucoma,
-                occlusion,
-                maculopathy,
-                other,
+                value
             } = table14Dto
-            let value: number
-
-            if(cataract) {
-                value = 1
-            } else if(glaucoma) {
-                value = 2
-            } else if(occlusion) {
-                value = 3
-            } else if(maculopathy) {
-                value = 4
-            } else if(other) {
-                value = 0
-            } else {
-                throw new BadRequestException()
-            }
 
             const table = this.table14Repository.create({ value, eye_photo: photo })
             return await this.table14Repository.save(table)
@@ -57,30 +39,16 @@ export class Table14Service {
         }
     }
 
-    async updateTable(eye_photo_id: string, table14Dto: Table14Dto): Promise<Table14> {
+    async updateTable(eye_photo_id: string, updateTable14Dto: UpdateTable14Dto): Promise<Table14> {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const table = await this.table14Repository.findOne({ where: { eye_photo } })
             const {
-                cataract,
-                glaucoma,
-                occlusion,
-                maculopathy,
-                other,
-            } = table14Dto
+                value
+            } = updateTable14Dto
 
-            if(cataract) {
-                table.value = 1
-            } else if(glaucoma) {
-                table.value = 2
-            } else if(occlusion) {
-                table.value = 3
-            } else if(maculopathy) {
-                table.value = 4
-            } else if(other) {
-                table.value = 0
-            } else {
-                throw new BadRequestException()
+            if(value) {
+                table.value = value
             }
 
             return await this.table14Repository.save(table)

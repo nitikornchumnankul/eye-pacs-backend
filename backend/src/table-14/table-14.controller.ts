@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt-auth.guard';
 import { Table14Dto } from './dto/table14.dto';
+import { UpdateTable14Dto } from './dto/update-table14.dto';
 import { Table14 } from './table-14.entity';
 import { Table14Service } from './table-14.service';
 
@@ -21,9 +22,9 @@ export class Table14Controller {
     @Patch(':eye_photo_id/update')
     updateTable(
         @Param('eye_photo_id') eye_photo_id: string,
-        @Body() table14Dto: Table14Dto,
+        @Body() updateTable14Dto: UpdateTable14Dto,
     ): Promise<Table14> {
-        return this.table14Service.updateTable(eye_photo_id, table14Dto)
+        return this.table14Service.updateTable(eye_photo_id, updateTable14Dto)
     }
 
     @Get(':eye_photo_id/get')
