@@ -191,7 +191,7 @@ export class AppService {
       for(let i=0; i<table_1.length; i++) {
         output.push(
           {
-            image_name: eyes[i].eye_photo_id,
+            image_name: table_1[i].eye_photo.eye_photo_id,
             table_1: table_1[i].value,
             table_2: table_2[i].value,
             table_3: table_3[i].value,
@@ -205,7 +205,7 @@ export class AppService {
             table_11: table_11[i].value,
             table_12: table_12[i].value,
             table_13: table_13[i].value,
-            eye_side: eyes[i].eyeside,
+            eye_side: table_1[i].eye_photo.eyeside,
           }
         )
       }
