@@ -31,6 +31,10 @@ import { Eye } from './table-interface';
 import * as fs from 'fs'
 import { ConfigService } from '@nestjs/config';
 import * as json2csv from 'json2csv'
+import { Table14Service } from './table-14/table-14.service';
+import { Table14Repository } from './table-14/table14.repository';
+import { CommentsService } from './comments/comments.service';
+import { CommentsRepository } from './comments/comments.repository';
 
 @Injectable()
 export class AppService {
@@ -77,6 +81,12 @@ export class AppService {
     @InjectRepository(Table13Repository)
     private table13Repository: Table13Repository,
 
+    @InjectRepository(Table14Repository)
+    private table14Repository: Table14Repository,
+
+    @InjectRepository(CommentsRepository)
+    private commentRepository: CommentsRepository,
+
     private table1Service: Table1Service,
     private table2Service: Table2Service,
     private table3Service: Table3Service,
@@ -90,6 +100,8 @@ export class AppService {
     private table11Service: Table11Service,
     private table12Service: Table12Service,
     private table13Service: Table13Service,
+    private table14Service: Table14Service,
+    private commentService: CommentsService,
 
     private configService: ConfigService,
   ) {}
@@ -109,6 +121,8 @@ export class AppService {
       await this.table11Service.deleteTable(eye_photo_id)
       await this.table12Service.deleteTable(eye_photo_id)
       await this.table13Service.deleteTable(eye_photo_id)
+      await this.table14Service.deleteTable(eye_photo_id)
+      await this.commentService.deleteComment(eye_photo_id)
       return "success"
     } catch(e) {
       throw new BadRequestException()
@@ -185,6 +199,16 @@ export class AppService {
       const table_13_query = this.table13Repository.createQueryBuilder('table_13')
         .leftJoinAndSelect('table_13.eye_photo', 'eye_photo')
       const table_13 = await table_13_query.getMany()
+
+      // Table 14
+      const table_14_query = this.table14Repository.createQueryBuilder('table_14')
+        .leftJoinAndSelect('table_14.eye_photo', 'eye_photo')
+      const table_14 = await table_14_query.getMany()
+
+      // Comment
+      const comment_query = this.commentRepository.createQueryBuilder('comments')
+        .leftJoinAndSelect('comments.eye_photo', 'eye_photo')
+      const comments = await comment_query.getMany()
       
       const export_path = this.configService.get('EXPORT_PATH')
       let output: Eye[] = []
@@ -205,7 +229,9 @@ export class AppService {
             table_11: table_11[i].value,
             table_12: table_12[i].value,
             table_13: table_13[i].value,
+            table_14: table_14[i].value,
             eye_side: table_1[i].eye_photo.eyeside,
+            comment: comments[i].description,
           }
         )
       }

@@ -13,5 +13,7 @@ export interface Eye {
     table_11: number,
     table_12: number,
     table_13: number,
+    table_14: number,
     eye_side: number,
+    comment: string,
 }
