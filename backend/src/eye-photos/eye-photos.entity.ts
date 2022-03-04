@@ -1,4 +1,3 @@
-import { EyeSide } from "src/enum/eyeside.enum";
 import { Status } from "src/enum/status.enum";
 import { Column, Entity, PrimaryColumn, CreateDateColumn } from "typeorm";
 
@@ -11,8 +10,8 @@ export class EyePhotos {
     @Column()
     path: string
 
-    @Column({ nullable: true })
-    eyeside: EyeSide
+    @Column({ type: 'integer', default: 2 })
+    eyeside: number
 
     @Column({ default: Status.inPorgress })
     status: Status

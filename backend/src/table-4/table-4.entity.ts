@@ -10,15 +10,8 @@ export class Table4 {
     table_4_id: string
 
     // <2a
-    @Column({ type: 'integer', default: 0 })
-    lower_2a: number
-    
-    // >2a
-    @Column({ type: 'integer', default: 0 })
-    upper_2a: number
-    
-    @Column({ type: 'integer', default: 0 })
-    cannot_grade: number
+    @Column({ type: 'integer' })
+    value: number
 
     @OneToOne(() => EyePhotos, { eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     @JoinColumn({ name: 'eye_photo_id' })

@@ -38,6 +38,9 @@ import { Table10Repository } from './table-10/table-10.repository';
 import { Table11Repository } from './table-11/table-11.repository';
 import { Table12Repository } from './table-12/table-12.repository';
 import { Table13Repository } from './table-13/table-13.repository';
+import { Table14Module } from './table-14/table-14.module';
+import { Table14Repository } from './table-14/table14.repository';
+import { CommentsRepository } from './comments/comments.repository';
 
 @Module({
   imports: [
@@ -58,6 +61,8 @@ import { Table13Repository } from './table-13/table-13.repository';
       Table11Repository,
       Table12Repository,
       Table13Repository,
+      Table14Repository,
+      CommentsRepository,
     ]),
 
     // Config
@@ -101,7 +106,8 @@ import { Table13Repository } from './table-13/table-13.repository';
     Table10Module,
     Table11Module,
     Table12Module,
-    Table13Module
+    Table13Module,
+    Table14Module
   ],
   controllers: [AppController],
   providers: [AppService],

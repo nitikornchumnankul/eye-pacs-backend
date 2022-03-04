@@ -18,19 +18,19 @@ export class Table12Service {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { lower_2DD, lower_1DD, cannot_grade } = createTableHeDto
-            let obj: object
+            let value: number
 
             if(lower_2DD) {
-                obj = { ...obj, lower_2DD: 1 }
+                value = 0
             } else if(lower_1DD) {
-                obj = { ...obj, lower_1DD: 1 }
+                value = 1
             } else if(cannot_grade) {
-                obj = { ...obj, cannot_grade: 1 }
+                value = 2
             } else {
                 throw new BadRequestException()
             }
 
-            const table = this.table12Repository.create({ ...obj, eye_photo: photo })
+            const table = this.table12Repository.create({ value, eye_photo: photo })
             return await this.table12Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
@@ -55,19 +55,11 @@ export class Table12Service {
             const { lower_2DD, lower_1DD, cannot_grade } = updateTableHeDto
 
             if(lower_2DD) {
-                table.lower_2DD = 1
-                table.lower_1DD = 0
-                table.cannot_grade = 0
-
+                table.value = 0
             } else if(lower_1DD) {
-                table.lower_2DD = 0
-                table.lower_1DD = 1
-                table.cannot_grade = 0
-
+                table.value = 1
             } else if(cannot_grade) {
-                table.lower_2DD = 0
-                table.lower_1DD = 0
-                table.cannot_grade = 1
+                table.value = 2
             } else {
                 throw new BadRequestException()
             }

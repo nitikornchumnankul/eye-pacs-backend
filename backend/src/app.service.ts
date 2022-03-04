@@ -27,10 +27,14 @@ import { Table8Repository } from './table-8/table-8.repository';
 import { Table8Service } from './table-8/table-8.service';
 import { Table9Repository } from './table-9/table-9.repository';
 import { Table9Service } from './table-9/table-9.service';
-import { Eye } from './users/table-interface';
+import { Eye } from './table-interface';
 import * as fs from 'fs'
 import { ConfigService } from '@nestjs/config';
 import * as json2csv from 'json2csv'
+import { Table14Service } from './table-14/table-14.service';
+import { Table14Repository } from './table-14/table14.repository';
+import { CommentsService } from './comments/comments.service';
+import { CommentsRepository } from './comments/comments.repository';
 
 @Injectable()
 export class AppService {
@@ -77,6 +81,12 @@ export class AppService {
     @InjectRepository(Table13Repository)
     private table13Repository: Table13Repository,
 
+    @InjectRepository(Table14Repository)
+    private table14Repository: Table14Repository,
+
+    @InjectRepository(CommentsRepository)
+    private commentRepository: CommentsRepository,
+
     private table1Service: Table1Service,
     private table2Service: Table2Service,
     private table3Service: Table3Service,
@@ -90,6 +100,8 @@ export class AppService {
     private table11Service: Table11Service,
     private table12Service: Table12Service,
     private table13Service: Table13Service,
+    private table14Service: Table14Service,
+    private commentService: CommentsService,
 
     private configService: ConfigService,
   ) {}
@@ -109,6 +121,8 @@ export class AppService {
       await this.table11Service.deleteTable(eye_photo_id)
       await this.table12Service.deleteTable(eye_photo_id)
       await this.table13Service.deleteTable(eye_photo_id)
+      await this.table14Service.deleteTable(eye_photo_id)
+      await this.commentService.deleteComment(eye_photo_id)
       return "success"
     } catch(e) {
       throw new BadRequestException()
@@ -185,58 +199,39 @@ export class AppService {
       const table_13_query = this.table13Repository.createQueryBuilder('table_13')
         .leftJoinAndSelect('table_13.eye_photo', 'eye_photo')
       const table_13 = await table_13_query.getMany()
+
+      // Table 14
+      const table_14_query = this.table14Repository.createQueryBuilder('table_14')
+        .leftJoinAndSelect('table_14.eye_photo', 'eye_photo')
+      const table_14 = await table_14_query.getMany()
+
+      // Comment
+      const comment_query = this.commentRepository.createQueryBuilder('comments')
+        .leftJoinAndSelect('comments.eye_photo', 'eye_photo')
+      const comments = await comment_query.getMany()
       
       const export_path = this.configService.get('EXPORT_PATH')
       let output: Eye[] = []
       for(let i=0; i<table_1.length; i++) {
         output.push(
           {
-            image_name: eyes[i].eye_photo_id,
-
-            yes_1: table_1[i].yes,
-            cannot_grade_1: table_1[i].cannot_grade,
-
-            yes_2: table_2[i].yes,
-            cannot_grade_2: table_2[i].cannot_grade,
-
-            yes_3: table_3[i].yes,
-            cannot_grade_3: table_3[i].cannot_grade,
-
-            lower_2a: table_4[i].lower_2a,
-            upper_2a: table_4[i].upper_2a,
-            cannot_grade_2a: table_4[i].cannot_grade,
-
-            yes_5: table_5[i].yes,
-            cannot_grade_5: table_5[i].cannot_grade,
-
-            lower_8a: table_6[i].lower_8a,
-            upper_8a: table_6[i].upper_8a,
-            cannot_grade_8a: table_6[i].cannot_grade,
-
-            yes_7: table_7[i].yes,
-            cannot_grade_7: table_7[i].cannot_grade,
-
-            yes_8: table_8[i].yes,
-            cannot_grade_8: table_8[i].cannot_grade,
-
-            yes_9: table_9[i].yes,
-            cannot_grade_9: table_9[i].cannot_grade,
-
-            yes_10: table_10[i].yes,
-            cannot_grade_10: table_10[i].cannot_grade,
-
-            yes_11: table_11[i].yes,
-            cannot_grade_11: table_11[i].cannot_grade,
-
-            lower_2DD: table_12[i].lower_2DD,
-            lower_1DD: table_12[i].lower_1DD,
-            cannot_grade_DD: table_12[i].cannot_grade,
-
-            cataract: table_13[i].cataract,
-            glaucoma: table_13[i].glaucoma,
-            occlusion: table_13[i].occlusion,
-            maculopathy: table_13[i].maculopathy,
-            other: table_13[i].other,
+            image_name: table_1[i].eye_photo.eye_photo_id,
+            table_1: table_1[i].value,
+            table_2: table_2[i].value,
+            table_3: table_3[i].value,
+            table_4: table_4[i].value,
+            table_5: table_5[i].value,
+            table_6: table_6[i].value,
+            table_7: table_7[i].value,
+            table_8: table_8[i].value,
+            table_9: table_9[i].value,
+            table_10: table_10[i].value,
+            table_11: table_11[i].value,
+            table_12: table_12[i].value,
+            table_13: table_13[i].value,
+            table_14: table_14[i].value,
+            eye_side: table_1[i].eye_photo.eyeside,
+            comment: comments[i].description,
           }
         )
       }

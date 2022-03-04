@@ -18,19 +18,19 @@ export class Table6Service {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { lower_8a, upper_8a, cannot_grade } = createTableIrmaDto
-            let obj: object
+            let value: number
 
             if(lower_8a) {
-                obj = { ...obj, lower_8a: 1 }
+                value = 0
             } else if(upper_8a) {
-                obj = { ...obj, upper_8a: 1 }
+                value = 1
             } else if(cannot_grade) {
-                obj = { ...obj, cannot_grade: 1 }
+                value = 2
             } else {
                 throw new BadRequestException()
             }
 
-            const table = this.table6Repository.create({ ...obj, eye_photo: photo })
+            const table = this.table6Repository.create({ value, eye_photo: photo })
             return await this.table6Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
@@ -55,19 +55,11 @@ export class Table6Service {
             const { lower_8a, upper_8a, cannot_grade } = updateTableIrmaDto
 
             if(lower_8a) {
-                table.lower_8a = 1
-                table.upper_8a = 0
-                table.cannot_grade = 0
-
+                table.value = 0
             } else if(upper_8a) {
-                table.lower_8a = 0
-                table.upper_8a = 1
-                table.cannot_grade = 0
-
+                table.value = 1
             } else if(cannot_grade) {
-                table.lower_8a = 0
-                table.upper_8a = 0
-                table.cannot_grade = 1
+                table.value = 2
             } else {
                 throw new BadRequestException()
             }

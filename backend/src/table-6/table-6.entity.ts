@@ -9,16 +9,8 @@ export class Table6 {
     @PrimaryGeneratedColumn('uuid')
     table_6_id: string
 
-    // <8a
-    @Column({ type: 'integer', default: 0 })
-    lower_8a: number
-    
-    // >8a
-    @Column({ type: 'integer', default: 0 })
-    upper_8a: number
-    
-    @Column({ type: 'integer', default: 0 })
-    cannot_grade: number
+    @Column({ type: 'integer' })
+    value: number
 
     @OneToOne(() => EyePhotos, { eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     @JoinColumn({ name: 'eye_photo_id' })

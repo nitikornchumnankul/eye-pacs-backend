@@ -7,20 +7,8 @@ export class Table13 {
     @PrimaryGeneratedColumn('uuid')
     table_13_id: string
 
-    @Column({ type: 'integer', default: 0 })
-    cataract: number
-
-    @Column({ type: 'integer', default: 0 })
-    glaucoma: number
-
-    @Column({ type: 'integer', default: 0 })
-    occlusion: number
-
-    @Column({ type: 'integer', default: 0 })
-    maculopathy: number
-
-    @Column({ type: 'integer', default: 0 })
-    other: number
+    @Column({ type: 'integer' })
+    value: number
 
     @OneToOne(() => EyePhotos, { eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
     @JoinColumn({ name: 'eye_photo_id' })
