@@ -188,7 +188,7 @@ export class AppService {
       
       const export_path = this.configService.get('EXPORT_PATH')
       let output: Eye[] = []
-      for(let i=0; i<eyes.length; i++) {
+      for(let i=0; i<table_1.length; i++) {
         output.push(
           {
             image_name: eyes[i].eye_photo_id,
