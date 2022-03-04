@@ -10,7 +10,7 @@ export class EyePhotos {
     @Column()
     path: string
 
-    @Column({ nullable: true, type: 'integer' })
+    @Column({ type: 'integer', default: 2 })
     eyeside: number
 
     @Column({ default: Status.inPorgress })
