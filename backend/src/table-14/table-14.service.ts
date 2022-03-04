@@ -41,8 +41,7 @@ export class Table14Service {
 
     async updateTable(eye_photo_id: string, updateTable14Dto: UpdateTable14Dto): Promise<Table14> {
         try {
-            const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
-            const table = await this.table14Repository.findOne({ where: { eye_photo } })
+            const table = await this.getTable(eye_photo_id)
             const {
                 value
             } = updateTable14Dto
@@ -50,7 +49,7 @@ export class Table14Service {
             if(value) {
                 table.value = value
             }
-
+            
             return await this.table14Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
