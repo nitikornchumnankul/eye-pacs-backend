@@ -27,7 +27,7 @@ import { Table8Repository } from './table-8/table-8.repository';
 import { Table8Service } from './table-8/table-8.service';
 import { Table9Repository } from './table-9/table-9.repository';
 import { Table9Service } from './table-9/table-9.service';
-import { Eye } from './users/table-interface';
+import { Eye } from './table-interface';
 import * as fs from 'fs'
 import { ConfigService } from '@nestjs/config';
 import * as json2csv from 'json2csv'
@@ -188,55 +188,24 @@ export class AppService {
       
       const export_path = this.configService.get('EXPORT_PATH')
       let output: Eye[] = []
-      for(let i=0; i<table_1.length; i++) {
+      for(let i=0; i<eyes.length; i++) {
         output.push(
           {
             image_name: eyes[i].eye_photo_id,
-
-            yes_1: table_1[i].yes,
-            cannot_grade_1: table_1[i].cannot_grade,
-
-            yes_2: table_2[i].yes,
-            cannot_grade_2: table_2[i].cannot_grade,
-
-            yes_3: table_3[i].yes,
-            cannot_grade_3: table_3[i].cannot_grade,
-
-            lower_2a: table_4[i].lower_2a,
-            upper_2a: table_4[i].upper_2a,
-            cannot_grade_2a: table_4[i].cannot_grade,
-
-            yes_5: table_5[i].yes,
-            cannot_grade_5: table_5[i].cannot_grade,
-
-            lower_8a: table_6[i].lower_8a,
-            upper_8a: table_6[i].upper_8a,
-            cannot_grade_8a: table_6[i].cannot_grade,
-
-            yes_7: table_7[i].yes,
-            cannot_grade_7: table_7[i].cannot_grade,
-
-            yes_8: table_8[i].yes,
-            cannot_grade_8: table_8[i].cannot_grade,
-
-            yes_9: table_9[i].yes,
-            cannot_grade_9: table_9[i].cannot_grade,
-
-            yes_10: table_10[i].yes,
-            cannot_grade_10: table_10[i].cannot_grade,
-
-            yes_11: table_11[i].yes,
-            cannot_grade_11: table_11[i].cannot_grade,
-
-            lower_2DD: table_12[i].lower_2DD,
-            lower_1DD: table_12[i].lower_1DD,
-            cannot_grade_DD: table_12[i].cannot_grade,
-
-            cataract: table_13[i].cataract,
-            glaucoma: table_13[i].glaucoma,
-            occlusion: table_13[i].occlusion,
-            maculopathy: table_13[i].maculopathy,
-            other: table_13[i].other,
+            table_1: table_1[i].value,
+            table_2: table_2[i].value,
+            table_3: table_3[i].value,
+            table_4: table_4[i].value,
+            table_5: table_5[i].value,
+            table_6: table_6[i].value,
+            table_7: table_7[i].value,
+            table_8: table_8[i].value,
+            table_9: table_9[i].value,
+            table_10: table_10[i].value,
+            table_11: table_11[i].value,
+            table_12: table_12[i].value,
+            table_13: table_13[i].value,
+            eye_side: eyes[i].eyeside,
           }
         )
       }

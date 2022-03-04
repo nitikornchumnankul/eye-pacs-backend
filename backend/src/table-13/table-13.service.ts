@@ -24,23 +24,23 @@ export class Table13Service {
                 maculopathy,
                 other,
             } = createTableOtherDto
-            let obj: object
+            let value: number
 
             if(cataract) {
-                obj = { ...obj, cataract: 1 }
+                value = 1
             } else if(glaucoma) {
-                obj = { ...obj, glaucoma: 2 }
+                value = 2
             } else if(occlusion) {
-                obj = { ...obj, occlusion: 3 }
+                value = 3
             } else if(maculopathy) {
-                obj = { ...obj, maculopathy: 4 }
+                value = 4
             } else if(other) {
-                obj = { ...obj, other: 5 }
+                value = 0
             } else {
                 throw new BadRequestException()
             }
 
-            const table = this.table13Repository.create({ ...obj, eye_photo: photo })
+            const table = this.table13Repository.create({ value, eye_photo: photo })
             return await this.table13Repository.save(table)
         } catch(e) {
             throw new BadRequestException({
@@ -71,40 +71,15 @@ export class Table13Service {
             } = updateTableOtherDto
 
             if(cataract) {
-                table.cataract = 1
-                table.glaucoma = 0
-                table.occlusion = 0
-                table.maculopathy = 0
-                table.other = 0
-
+                table.value = 1
             } else if(glaucoma) {
-                table.cataract = 0
-                table.glaucoma = 2
-                table.occlusion = 0
-                table.maculopathy = 0
-                table.other = 0
-
+                table.value = 2
             } else if(occlusion) {
-                table.cataract = 0
-                table.glaucoma = 0
-                table.occlusion = 3
-                table.maculopathy = 0
-                table.other = 0
-
+                table.value = 3
             } else if(maculopathy) {
-                table.cataract = 0
-                table.glaucoma = 0
-                table.occlusion = 0
-                table.maculopathy = 4
-                table.other = 0
-
+                table.value = 4
             } else if(other) {
-                table.cataract = 0
-                table.glaucoma = 0
-                table.occlusion = 0
-                table.maculopathy = 0
-                table.other = 5
-
+                table.value = 0
             } else {
                 throw new BadRequestException()
             }

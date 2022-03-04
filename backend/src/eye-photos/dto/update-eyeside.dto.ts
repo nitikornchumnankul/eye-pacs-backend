@@ -1,9 +1,7 @@
-import { IsEnum, IsNotEmpty } from "class-validator";
-import { EyeSide } from "src/enum/eyeside.enum";
+import { IsNotEmpty } from "class-validator";
 
 export class UpdateEyeSideDto {
 
     @IsNotEmpty()
-    @IsEnum(EyeSide)
-    eyeside: EyeSide
+    eyeside: number
 }

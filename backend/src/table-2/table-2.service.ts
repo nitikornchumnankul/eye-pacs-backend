@@ -18,17 +18,17 @@ export class Table2Service {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const { yes, cannot_grade } = createTableDto
-            let obj: object
+            let value: number
 
             if(yes) {
-                obj = { ...obj, yes: 1 }
+                value = 1
             } else if(cannot_grade) {
-                obj = { ...obj, cannot_grade: 1 }
+                value = 0
             } else {
                 throw new BadRequestException()
             }
 
-            const table = this.table2Repository.create({ ...obj, eye_photo: photo })
+            const table = this.table2Repository.create({ value, eye_photo: photo })
             return await this.table2Repository.save(table)
         } catch(e) {
             throw new BadRequestException({ message: 'Error, Can\'t create table.' })
@@ -51,11 +51,9 @@ export class Table2Service {
             const { yes, cannot_grade } = updateTableDto
 
             if(yes) {
-                table.yes = 1
-                table.cannot_grade = 0
+                table.value = 1
             } else if(cannot_grade) {
-                table.yes = 0
-                table.cannot_grade = 1
+                table.value = 0
             } else {
                 throw new BadRequestException()
             }
