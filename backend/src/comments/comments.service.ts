@@ -58,12 +58,15 @@ export class CommentsService {
         }
     }
 
-    async deleteComment(eye_photo_id: string): Promise<Comments> {
+    async deleteComment(eye_photo_id: string): Promise<string> {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const comment = await this.commentsRepostiory.findOne({ where: { eye_photo } })
+            if(!comment) {
+                return "success"
+            }
             await this.commentsRepostiory.delete(comment.comment_id)
-            return comment
+            return "success"
         } catch(e) {
             throw new NotFoundException({
                 message: 'Error, comment is not found.'

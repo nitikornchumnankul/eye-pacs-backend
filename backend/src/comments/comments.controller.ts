@@ -41,7 +41,7 @@ export class CommentsController {
     @Delete(':eye_photo_id/delete')
     deleteComment(
         @Param('eye_photo_id') eye_photo_id: string
-    ): Promise<Comments> {
+    ): Promise<string> {
         return this.commentsService.deleteComment(eye_photo_id)
     }
 }
