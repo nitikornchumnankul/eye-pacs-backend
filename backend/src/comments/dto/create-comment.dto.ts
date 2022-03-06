@@ -1,7 +1,7 @@
-import { IsNotEmpty } from "class-validator";
+import { IsOptional } from "class-validator";
 
 export class CreateCommentDto {
 
-    @IsNotEmpty()
-    description: string
+    @IsOptional()
+    description?: string
 }

@@ -7,7 +7,7 @@ export class Comments {
     @PrimaryGeneratedColumn('uuid')
     comment_id: string
 
-    @Column()
+    @Column({ nullable: true })
     description: string
 
     @OneToOne(() => EyePhotos, { eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
