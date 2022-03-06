@@ -36,7 +36,9 @@ export class CommentsService {
             const comment = await this.commentsRepostiory.findOne({ where: { eye_photo } })
             const { description } = editCommentDto
 
-            comment.description = description
+            if(description) {
+                comment.description = description
+            }
 
             return await this.commentsRepostiory.save(comment)
         } catch(e) {
