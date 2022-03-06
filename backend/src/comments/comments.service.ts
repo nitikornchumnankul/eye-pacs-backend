@@ -51,6 +51,7 @@ export class CommentsService {
     async getComment(eye_photo_id: string): Promise<Comments> {
         try {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
+            console.log(eye_photo)
             const comment = await this.commentsRepostiory.findOne({ where: { eye_photo } })
             return comment
         } catch(e) {
