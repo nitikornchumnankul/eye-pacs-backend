@@ -48,7 +48,7 @@ export class Table13Service {
             } = updateTableOtherDto
 
             if(value) {
-                table.value = 1
+                table.value = value
             }
 
             return await this.table13Repository.save(table)
