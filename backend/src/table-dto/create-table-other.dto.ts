@@ -1,19 +1,7 @@
-import { IsOptional } from "class-validator"
+import { IsNotEmpty } from "class-validator"
 
 export class CreateTableOtherDto {
 
-    @IsOptional()
-    cataract?: number
-
-    @IsOptional()
-    glaucoma?: number
-
-    @IsOptional()
-    occlusion?: number
-
-    @IsOptional()
-    maculopathy?: number
-
-    @IsOptional()
-    other?: number
+    @IsNotEmpty()
+    value: number
 }

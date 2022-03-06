@@ -18,27 +18,8 @@ export class Table13Service {
         try {
             const photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const {
-                cataract,
-                glaucoma,
-                occlusion,
-                maculopathy,
-                other,
+                value
             } = createTableOtherDto
-            let value: number
-
-            if(cataract) {
-                value = 1
-            } else if(glaucoma) {
-                value = 2
-            } else if(occlusion) {
-                value = 3
-            } else if(maculopathy) {
-                value = 4
-            } else if(other) {
-                value = 0
-            } else {
-                throw new BadRequestException()
-            }
 
             const table = this.table13Repository.create({ value, eye_photo: photo })
             return await this.table13Repository.save(table)
@@ -63,25 +44,11 @@ export class Table13Service {
             const eye_photo = await this.eyePhotosService.getEyePhotoById(eye_photo_id)
             const table = await this.table13Repository.findOne({ where: { eye_photo } })
             const {
-                cataract,
-                glaucoma,
-                occlusion,
-                maculopathy,
-                other,
+                value
             } = updateTableOtherDto
 
-            if(cataract) {
+            if(value) {
                 table.value = 1
-            } else if(glaucoma) {
-                table.value = 2
-            } else if(occlusion) {
-                table.value = 3
-            } else if(maculopathy) {
-                table.value = 4
-            } else if(other) {
-                table.value = 0
-            } else {
-                throw new BadRequestException()
             }
 
             return await this.table13Repository.save(table)
