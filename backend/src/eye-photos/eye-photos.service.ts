@@ -52,17 +52,20 @@ export class EyePhotosService {
 
     async getEyePhotos(searchEyePhotosDto: SearchEyePhotosDto): Promise<EyePhotos[]> {
         try {
-            const { name, status, date } = searchEyePhotosDto
+            const { name, status, status_sort, date_sort } = searchEyePhotosDto
             const query = this.eyePhotosRepository.createQueryBuilder('eye_photos')
 
             if(name) {
                 query.where('(LOWER(eye_photos.eye_photo_id) LIKE LOWER(:name))', { name: `%${name}%` })
             }
-            if(date) {
-                query.orderBy('eye_photos.created', `${date}`)
-            }
             if(status) {
-                query.orderBy('eye_photos.status', `${status}`)
+                query.where('(eye_photos.status = UPPER(:status))', { status })
+            }
+            if(date_sort) {
+                query.orderBy('eye_photos.created', `${date_sort}`)
+            }
+            if(status_sort) {
+                query.orderBy('eye_photos.status', `${status_sort}`)
             }
 
             return await query.getMany()

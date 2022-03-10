@@ -1,4 +1,5 @@
 import { IsEnum, IsOptional } from "class-validator";
+import { Status } from "src/enum/status.enum";
 import { Sort } from "../enums/sort.enum";
 
 export class SearchEyePhotosDto {
@@ -7,10 +8,14 @@ export class SearchEyePhotosDto {
     name?: string
 
     @IsOptional()
-    @IsEnum(Sort)
-    status?: Sort
+    @IsEnum(Status)
+    status?: Status
 
     @IsOptional()
     @IsEnum(Sort)
-    date?: Sort
+    status_sort?: Sort
+
+    @IsOptional()
+    @IsEnum(Sort)
+    date_sort?: Sort
 }
