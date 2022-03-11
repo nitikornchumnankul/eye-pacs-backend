@@ -9,7 +9,7 @@ export class Table7 {
     @PrimaryGeneratedColumn('uuid')
     table_7_id: string
 
-    @Column({ type: 'integer'})
+    @Column({ type: 'integer' })
     value: number
 
     @OneToOne(() => EyePhotos, { eager: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })

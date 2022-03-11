@@ -25,7 +25,7 @@ export class Table3Service {
             } else if(cannot_grade) {
                 value = 0
             } else {
-                throw new BadRequestException()
+                value = 3
             }
 
             const table = this.table3Repository.create({ value, eye_photo: photo })
