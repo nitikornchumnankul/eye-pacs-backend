@@ -27,7 +27,7 @@ export class Table6Service {
             } else if(cannot_grade) {
                 value = 2
             } else {
-                throw new BadRequestException()
+                value = 3
             }
 
             const table = this.table6Repository.create({ value, eye_photo: photo })
