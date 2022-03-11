@@ -41,6 +41,7 @@ import { Table13Repository } from './table-13/table-13.repository';
 import { Table14Module } from './table-14/table-14.module';
 import { Table14Repository } from './table-14/table14.repository';
 import { CommentsRepository } from './comments/comments.repository';
+import { config } from 'process';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { CommentsRepository } from './comments/comments.repository';
 
     // Config
     ConfigModule.forRoot({
+      isGlobal: true,
       envFilePath: [`.env.stage.${process.env.STAGE}`]
     }),
 
@@ -87,6 +89,14 @@ import { CommentsRepository } from './comments/comments.repository';
         }
       }
     }),
+
+    // For Docker
+    // TypeOrmModule.forRoot({
+    //   type: "postgres",
+    //   synchronize: true,
+    //   autoLoadEntities: true,
+    //   url: process.env.DATABASE_URL // From env of Docker
+    // }),
 
     // Module
     ConfigModule,
