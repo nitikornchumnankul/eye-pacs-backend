@@ -3,9 +3,6 @@ export interface Eye {
     table_1: number,
     table_2: number,
     table_3: number,
-    table_4: number,
-    table_5: number,
-    table_6: number,
     table_7: number,
     table_8: number,
     table_9: number,
@@ -14,6 +11,7 @@ export interface Eye {
     table_12: number,
     table_13: number,
     table_14: number,
+    table_15:number,
     eye_side: number,
     comment: string,
 }

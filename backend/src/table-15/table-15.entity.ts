@@ -1,15 +1,12 @@
-// Herrmorhaqes with or without MA (HMA) 2a
-
 import { EyePhotos } from "src/eye-photos/eye-photos.entity";
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'table_4' })
-export class Table4 {
+@Entity({ name: 'table_15' })
+export class Table15 {
 
     @PrimaryGeneratedColumn('uuid')
-    table_4_id: string
+    table_15_id: string
 
-    // <2a
     @Column({ type: 'integer' })
     value: number
 

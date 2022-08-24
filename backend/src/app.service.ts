@@ -15,12 +15,7 @@ import { Table2Repository } from './table-2/table-2.repository';
 import { Table2Service } from './table-2/table-2.service';
 import { Table3Repository } from './table-3/table-3.repository';
 import { Table3Service } from './table-3/table-3.service';
-import { Table4Repository } from './table-4/table-4.repository';
-import { Table4Service } from './table-4/table-4.service';
-import { Table5Repository } from './table-5/table-5.repository';
-import { Table5Service } from './table-5/table-5.service';
-import { Table6Repository } from './table-6/table-6.repository';
-import { Table6Service } from './table-6/table-6.service';
+
 import { Table7Repository } from './table-7/table-7.repository';
 import { Table7Service } from './table-7/table-7.service';
 import { Table8Repository } from './table-8/table-8.repository';
@@ -35,6 +30,8 @@ import { Table14Service } from './table-14/table-14.service';
 import { Table14Repository } from './table-14/table14.repository';
 import { CommentsService } from './comments/comments.service';
 import { CommentsRepository } from './comments/comments.repository';
+import { Table15Reposotory } from './table-15/table15.repository';
+import { Table15Service } from './table-15/table-15.service';
 
 @Injectable()
 export class AppService {
@@ -50,15 +47,6 @@ export class AppService {
 
     @InjectRepository(Table3Repository)
     private table3Repository: Table3Repository,
-
-    @InjectRepository(Table4Repository)
-    private table4Repository: Table4Repository,
-
-    @InjectRepository(Table5Repository)
-    private table5Repository: Table5Repository,
-
-    @InjectRepository(Table6Repository)
-    private table6Repository: Table6Repository,
 
     @InjectRepository(Table7Repository)
     private table7Repository: Table7Repository,
@@ -84,15 +72,16 @@ export class AppService {
     @InjectRepository(Table14Repository)
     private table14Repository: Table14Repository,
 
+    @InjectRepository(Table15Reposotory)
+    private table15Repository: Table15Reposotory,
+
     @InjectRepository(CommentsRepository)
     private commentRepository: CommentsRepository,
 
     private table1Service: Table1Service,
     private table2Service: Table2Service,
     private table3Service: Table3Service,
-    private table4Service: Table4Service,
-    private table5Service: Table5Service,
-    private table6Service: Table6Service,
+
     private table7Service: Table7Service,
     private table8Service: Table8Service,
     private table9Service: Table9Service,
@@ -101,6 +90,7 @@ export class AppService {
     private table12Service: Table12Service,
     private table13Service: Table13Service,
     private table14Service: Table14Service,
+    private table15Service: Table15Service,
     private commentService: CommentsService,
 
     private configService: ConfigService,
@@ -111,9 +101,7 @@ export class AppService {
       await this.table1Service.deleteTable(eye_photo_id)
       await this.table2Service.deleteTable(eye_photo_id)
       await this.table3Service.deleteTable(eye_photo_id)
-      await this.table4Service.deleteTable(eye_photo_id)
-      await this.table5Service.deleteTable(eye_photo_id)
-      await this.table6Service.deleteTable(eye_photo_id)
+ 
       await this.table7Service.deleteTable(eye_photo_id)
       await this.table8Service.deleteTable(eye_photo_id)
       await this.table9Service.deleteTable(eye_photo_id)
@@ -122,6 +110,7 @@ export class AppService {
       await this.table12Service.deleteTable(eye_photo_id)
       await this.table13Service.deleteTable(eye_photo_id)
       await this.table14Service.deleteTable(eye_photo_id)
+      await this.table15Service.deleteTable(eye_photo_id)
       await this.commentService.deleteComment(eye_photo_id)
       return "success"
     } catch(e) {
@@ -150,21 +139,7 @@ export class AppService {
         .leftJoinAndSelect('table_3.eye_photo', 'eye_photo')
       const table_3 = await table_3_query.getMany()
 
-      // Table 4
-      const table_4_query = this.table4Repository.createQueryBuilder('table_4')
-        .leftJoinAndSelect('table_4.eye_photo', 'eye_photo')
-      const table_4 = await table_4_query.getMany()
-
-      // Table 5
-      const table_5_query = this.table5Repository.createQueryBuilder('table_5')
-        .leftJoinAndSelect('table_5.eye_photo', 'eye_photo')
-      const table_5 = await table_5_query.getMany()
-
-      // Table 6
-      const table_6_query = this.table6Repository.createQueryBuilder('table_6')
-        .leftJoinAndSelect('table_6.eye_photo', 'eye_photo')
-      const table_6 = await table_6_query.getMany()
-
+     
       // Table 7
       const table_7_query = this.table7Repository.createQueryBuilder('table_7')
         .leftJoinAndSelect('table_7.eye_photo', 'eye_photo')
@@ -205,6 +180,13 @@ export class AppService {
         .leftJoinAndSelect('table_14.eye_photo', 'eye_photo')
       const table_14 = await table_14_query.getMany()
 
+      const table_15_query = this.table15Repository.createQueryBuilder('table_15')
+      .leftJoinAndSelect('table_14.eye_photo', 'eye_photo')
+      const table_15 = await table_15_query.getMany()
+
+
+
+
       // Comment
       const comment_query = this.commentRepository.createQueryBuilder('comments')
         .leftJoinAndSelect('comments.eye_photo', 'eye_photo')
@@ -219,9 +201,6 @@ export class AppService {
             table_1: table_1[i].value,
             table_2: table_2[i].value,
             table_3: table_3[i].value,
-            table_4: table_4[i].value,
-            table_5: table_5[i].value,
-            table_6: table_6[i].value,
             table_7: table_7[i].value,
             table_8: table_8[i].value,
             table_9: table_9[i].value,
@@ -230,6 +209,7 @@ export class AppService {
             table_12: table_12[i].value,
             table_13: table_13[i].value,
             table_14: table_14[i].value,
+            table_15: table_15[i].value,
             eye_side: table_1[i].eye_photo.eyeside,
             comment: comments[i].description,
           }

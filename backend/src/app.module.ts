@@ -12,9 +12,7 @@ import { CommentsModule } from './comments/comments.module';
 import { Table1Module } from './table-1/table-1.module';
 import { Table2Module } from './table-2/table-2.module';
 import { Table3Module } from './table-3/table-3.module';
-import { Table4Module } from './table-4/table-4.module';
-import { Table5Module } from './table-5/table-5.module';
-import { Table6Module } from './table-6/table-6.module';
+
 import { Table7Module } from './table-7/table-7.module';
 import { Table8Module } from './table-8/table-8.module';
 import { Table9Module } from './table-9/table-9.module';
@@ -28,9 +26,7 @@ import { Table1Repository } from './table-1/table-1.repository';
 import { EyePhotosRepository } from './eye-photos/eye-photos.repository';
 import { Table2Repository } from './table-2/table-2.repository';
 import { Table3Repository } from './table-3/table-3.repository';
-import { Table4Repository } from './table-4/table-4.repository';
-import { Table5Repository } from './table-5/table-5.repository';
-import { Table6Repository } from './table-6/table-6.repository';
+
 import { Table7Repository } from './table-7/table-7.repository';
 import { Table8Repository } from './table-8/table-8.repository';
 import { Table9Repository } from './table-9/table-9.repository';
@@ -42,6 +38,8 @@ import { Table14Module } from './table-14/table-14.module';
 import { Table14Repository } from './table-14/table14.repository';
 import { CommentsRepository } from './comments/comments.repository';
 import { config } from 'process';
+import { Table15Reposotory } from './table-15/table15.repository';
+import { Table15Module } from './table-15/table-15.module';
 
 @Module({
   imports: [
@@ -52,9 +50,7 @@ import { config } from 'process';
       Table1Repository,
       Table2Repository,
       Table3Repository,
-      Table4Repository,
-      Table5Repository,
-      Table6Repository,
+ 
       Table7Repository,
       Table8Repository,
       Table9Repository,
@@ -63,6 +59,7 @@ import { config } from 'process';
       Table12Repository,
       Table13Repository,
       Table14Repository,
+      Table15Reposotory,
       CommentsRepository,
     ]),
 
@@ -107,9 +104,7 @@ import { config } from 'process';
     Table1Module,
     Table2Module,
     Table3Module,
-    Table4Module,
-    Table5Module,
-    Table6Module,
+ 
     Table7Module,
     Table8Module,
     Table9Module,
@@ -117,7 +112,8 @@ import { config } from 'process';
     Table11Module,
     Table12Module,
     Table13Module,
-    Table14Module
+    Table14Module,
+    Table15Module
   ],
   controllers: [AppController],
   providers: [AppService],
